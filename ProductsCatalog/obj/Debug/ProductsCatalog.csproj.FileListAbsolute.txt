@@ -1,0 +1,10 @@
+H:\Pratice\ProductsCatalog\ProductsCatalog\bin\Debug\ProductsCatalog.dll.config
+H:\Pratice\ProductsCatalog\ProductsCatalog\bin\Debug\ProductsCatalog.dll
+H:\Pratice\ProductsCatalog\ProductsCatalog\bin\Debug\ProductsCatalog.pdb
+H:\Pratice\ProductsCatalog\ProductsCatalog\bin\Debug\EntityFramework.dll
+H:\Pratice\ProductsCatalog\ProductsCatalog\bin\Debug\EntityFramework.SqlServer.dll
+H:\Pratice\ProductsCatalog\ProductsCatalog\bin\Debug\EntityFramework.xml
+H:\Pratice\ProductsCatalog\ProductsCatalog\bin\Debug\EntityFramework.SqlServer.xml
+H:\Pratice\ProductsCatalog\ProductsCatalog\obj\Debug\ProductsCatalog.csprojResolveAssemblyReference.cache
+H:\Pratice\ProductsCatalog\ProductsCatalog\obj\Debug\ProductsCatalog.dll
+H:\Pratice\ProductsCatalog\ProductsCatalog\obj\Debug\ProductsCatalog.pdb

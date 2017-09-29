@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ProductsCatalog.tbl_Movies>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<table>
+    <tr>
+        @foreach (ProductsCatalog.tbl_Movies item in Model)
+        {
+               <td>
+                   Movie Name: item.
+               </td>
+        }
+    </tr>
+</table>

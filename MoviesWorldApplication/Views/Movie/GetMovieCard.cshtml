@@ -1,0 +1,25 @@
+﻿@model ProductsCatalog.tbl_Movies
+@{
+    ViewBag.Title = "GetMovieCard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetMovieCard</h2>
+<div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+    <div class="card card-inverse card-info">
+        <img class="card-img-top" src="@Model.MovieImageURL">
+        <div class="card-block">
+            <figure class="profile profile-inline">
+                <img src="@Model.MovieImageURL" class="profile-avatar" alt="">
+            </figure>
+            <h4 class="card-title">@Model.MovieName</h4>
+            <div class="card-text">
+                @Model.Description
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-info btn-sm" type="submit">Buy @Model.Price</button>
+            @Html.ActionLink("Back", "Index", "Movie", new { @class= "btn btn-info btn-sm"});
+        </div>
+    </div>
+</div>

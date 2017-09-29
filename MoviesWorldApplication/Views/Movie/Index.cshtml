@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ProductsCatalog.tbl_Movies>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@foreach (var item in Model)
+{
+    <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+        <div class="card card-inverse card-info">
+            <img class="card-img-top" src="@item.MovieImageURL">
+            <div class="card-block">
+                <figure class="profile profile-inline">
+                    <img src="@item.MovieImageURL" class="profile-avatar" alt="">
+                </figure>
+                <h4 class="card-title">@item.MovieName</h4>
+                <div class="card-text">
+                    @item.Description
+                </div>
+            </div>
+            <div class="card-footer">
+                @Html.ActionLink("Buy " + @item.Price, "GetMovieCard", "Movie",new { movieID=@item.MovieID }, new {id=@item.MovieID, @class= "btn btn-info btn-sm" });
+                <button class="btn btn-info btn-sm">Buy @item.Price</button>
+            </div>
+        </div>
+    </div>
+}
