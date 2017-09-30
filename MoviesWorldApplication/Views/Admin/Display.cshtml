@@ -13,5 +13,7 @@
     columns.Add(c => c.MovieName).Titled("Movie Name").Sortable(true);
     columns.Add(c => c.Description).Titled("Movie Description");
     columns.Add(c => c.Price).Titled("Rate").Sortable(true);
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Add", "Index"));
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(30).RenderValueAs(o => Html.ActionLink("Edit", "Edit", new {id=o.MovieID }));
 })
 
