@@ -5,21 +5,152 @@
 }
 
 <h2>GetMovieCard</h2>
-<div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-    <div class="card card-inverse card-info">
-        <img class="card-img-top" src="@Model.MovieImageURL">
-        <div class="card-block">
-            <figure class="profile profile-inline">
-                <img src="@Model.MovieImageURL" class="profile-avatar" alt="">
-            </figure>
-            <h4 class="card-title">@Model.MovieName</h4>
-            <div class="card-text">
-                @Model.Description
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div>
+                <div class="card card-inverse card-info">
+                    <img class="card-img-top" src="@Model.MovieImageURL">
+                    <div class="card-block">
+                        <figure class="profile profile-inline">
+                            <img src="@Model.MovieImageURL" class="profile-avatar" alt="">
+                        </figure>
+                        <h4 class="card-title">
+                            @Model.MovieName
+                        </h4>
+                        <div class="card-text">
+                            @Model.Description
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-info btn-sm" type="submit">Buy @Model.Price</button>
+                        @Html.ActionLink("Back", "Index", "Movie", new { @class = "btn btn-info btn-sm" });
+                    </div>
+                </div>
+                <!-- CREDIT CARD FORM STARTS HERE -->
+                <!-- CREDIT CARD FORM ENDS HERE -->
             </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-info btn-sm" type="submit">Buy @Model.Price</button>
-            @Html.ActionLink("Back", "Index", "Movie", new { @class= "btn btn-info btn-sm"});
+        <div class="col-lg-6">
+            <div class="panel panel-default credit-card-box">
+                <div class="panel-heading display-table">
+                    <div class="row display-tr">
+                        <h3 class="panel-title display-td">Payment Details</h3>
+                        <div class="display-td">
+                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("BookMovie", "Movie", FormMethod.Post, new { id = "movie-form", @class = "cardInfo", accept_charset = "UTF-8", novalidate = "", autocomplete = "on" }))
+                    {
+                        @Html.AntiForgeryToken();
+                        @Html.HiddenFor(x => x.MovieID)
+                        @Html.HiddenFor(x => x.Price);
+                        <div id="card-element">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="cardNumber">CARD NUMBER</label>
+                                        <div class="input-group">
+                                            <input type="tel"
+                                                   class="form-control"
+                                                   id="cc-number"
+                                                   name="cardNumber"
+                                                   placeholder="Valid Card Number"
+                                                   autocomplete="cc-number"
+                                                   required autofocus />
+                                            <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-7 col-md-7">
+                                    <div class="form-group">
+                                        <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                        <input type="tel"
+                                               class="form-control"
+                                               id="cardExpiry"
+                                               name="cardExpiry"
+                                               placeholder="MM / YY"
+                                               autocomplete="cc-exp"
+                                               required />
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 col-md-5 pull-right">
+                                    <div class="form-group">
+                                        <label for="cardCVC">CV CODE</label>
+                                        <input type="tel"
+                                               class="form-control"
+                                               id="cardCVC"
+                                               name="cardCVC"
+                                               placeholder="CVC"
+                                               autocomplete="cc-csc"
+                                               required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationSummary(true, "There was an error ", new { @class = "alert alert-danger" });
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="subscribe btn btn-success btn-lg btn-block" type="submit">Buy @Model.MovieName  @Model.Price</button>
+                            </div>
+                        </div>
+                        <div class="row" style="display:none;">
+                            <div class="col-xs-12">
+                                <p class="payment-errors"></p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>
+@*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">*@
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js");
+    @Scripts.Render("~/Scripts/jquery.validate.js");
+    @Scripts.Render("~/Scripts/jquery.payment.js");
+    @Scripts.Render("~/Scripts/payment-validations.js");
+    @Scripts.Render("https://js.stripe.com/v3/");
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var stripe = Stripe('pk_test_vVm9bva5gXUkWAxs1hdi3cye');
+            console.log(stripe);
+            var strCreditCardNumber = $("#cc-number").val();
+            var strCardExpiry = $("#cardExpiry").val();
+            var strCardCVV = $("#cardCVC").val();
+            console.log(strCreditCardNumber + " expiry" + strCardExpiry + " " + strCardCVV );
+            var elements = stripe.elements();
+            var card = elements.create('card');
+            card.mount('#card-element');
+            $("#movie-form").submit(function (e) {
+                console.log("button submited");
+                e.preventDefault();
+                stripe.createToken(card).then(function (result) {
+                    console.log("my token is " + result.token);
+                    if (result.error) {
+                        console.log(result.error.message);
+                    } else {
+                        console.log(result.token.id);
+                        //$("#payment-form").submit();
+                        var $form = $("#movie-form");
+                        var form = document.getElementById("movie-form");
+                        console.log("$form " + form);
+                        var hiddenInput = document.createElement('input');
+                        hiddenInput.setAttribute('type', 'hidden');
+                        hiddenInput.setAttribute('name', 'stripeToken');
+                        hiddenInput.setAttribute('value', result.token.id);
+                        form.appendChild(hiddenInput);
+                        form.submit();
+                    }
+                });
+
+            });
+        });
+    </script>
+}

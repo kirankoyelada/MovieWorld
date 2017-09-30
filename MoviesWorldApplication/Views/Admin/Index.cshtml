@@ -1,0 +1,34 @@
+﻿@model ProductsCatalog.tbl_Movies
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-block">
+        <h4 class="card-title">Movie World Catalog Entry Screen</h4>
+            @using (Html.BeginForm("Save", "Admin", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken();
+                <div class="form-group">
+                    @Html.LabelFor(x => x.MovieName, new { @class = "col-sm-2 control-label" })
+                    @Html.TextBoxFor(x => x.MovieName, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Description, new { @class = "col-sm-2 control-label" })
+                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Price, new { @class = "col-sm-2 control-label" })
+                    @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.MovieImageURL, new { @class = "col-sm-2 control-label" })
+                    @Html.TextBoxFor(x => x.MovieImageURL, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-10 col-sm-push-2">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                    <input type="reset" value="Clear" class="btn btn-default" />
+                </div>
+            }
+    </div>
+</div>

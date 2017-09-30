@@ -44,3 +44,5 @@ H:\Pratice\ProductsCatalog\MoviesWorldApplication\bin\Antlr3.Runtime.pdb
 H:\Pratice\ProductsCatalog\MoviesWorldApplication\bin\Newtonsoft.Json.xml
 H:\Pratice\ProductsCatalog\MoviesWorldApplication\obj\Debug\MoviesWorldApplication.dll
 H:\Pratice\ProductsCatalog\MoviesWorldApplication\obj\Debug\MoviesWorldApplication.pdb
+H:\Pratice\ProductsCatalog\MoviesWorldApplication\bin\Stripe.net.dll
+H:\Pratice\ProductsCatalog\MoviesWorldApplication\bin\GridMvc.dll

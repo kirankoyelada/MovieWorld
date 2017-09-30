@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "SuccessPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SuccessPage</h2>
+<hr />
+<div class="alert alert-success" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Success:</span>
+    Payment Confirmation Success we will ship the Movie Soon
+    @Html.ActionLink("Back", "Index", "Movie");
+</div>
